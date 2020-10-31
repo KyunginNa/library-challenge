@@ -10,4 +10,10 @@ describe Library do
             {:item=>{:title=>"Pippi Långstrump går ombord", :author=>"Astrid Lindgren"}, :available=>true, :return_date=>nil}] 
         expect(subject.book_collection).to eq expected_output
     end
+
+    it 'check if the library can access the hash of books and check its availability' do
+        expect(subject.check_out_book('Pippi')).to eq true
+    end
+
+  
 end
