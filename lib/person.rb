@@ -18,4 +18,14 @@ class Person
         end
     end
 
+
+    def borrow_book(title)
+        books = search(title)
+        @book_list.push(books)
+       
+    end
+
+
+
+
 end

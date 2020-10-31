@@ -26,4 +26,10 @@ describe Person do
         expected_output = {status: false, message: 'The book does not exist', date: Date.today}
         expect(subject.search('Harry')).to eq expected_output
     end
+
+    # it 'person can pick available books and add to his/her book_list' do
+    #     expected_output = {:item=>{:title=>"Alfons och soldatpappan", :author=>"Gunilla Bergström"}, :available=>true, :return_date=>nil}
+    #     expect(subject.borrow_book('Alfons och soldatpappan'))
+    #     expect(subject.book_list). to eq expected_output
+    # end
 end
