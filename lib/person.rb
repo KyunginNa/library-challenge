@@ -23,9 +23,11 @@ class Person
         book_collection = YAML.load_file('./lib/data.yml')
         books = search(title)
         books.each do |book|
+            index = book_collection.index {|h| h[:item][:title] == book[:item][:title]}
+            book_collection[index][:available] = false
+            book = book_collection[index]
             @book_list << book
-            book[:available] = false
         end
-        # File.open('./lib/data.yml', 'w') { |f| f.write book_collection.to_yaml }
+        File.open('./lib/data.yml', 'w') { |f| f.write book_collection.to_yaml }
     end
 end
