@@ -20,12 +20,12 @@ class Person
 
 
     def borrow_book(title)
+        book_collection = YAML.load_file('./lib/data.yml')
         books = search(title)
-        @book_list.push(books)
-       
+        books.each do |book|
+            @book_list << book
+            book[:available] = false
+        end
+        # File.open('./lib/data.yml', 'w') { |f| f.write book_collection.to_yaml }
     end
-
-
-
-
 end
