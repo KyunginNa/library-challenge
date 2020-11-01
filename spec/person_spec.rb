@@ -43,15 +43,17 @@ describe Person do
     end
 
     describe 'person can return borrowed book' do
-        before {subject.borrow_book('Alfons och soldatpappan', library)}
 
-        it 'can check if the person has the book in his/her book list' do
-        expected_output = {status: false, message: 'You do not have this book in your possession!', date: Date.today}
-        expect(subject.return_book('Harry Potter', library)).to eq expected_output
+        it 'change book availability in the library book collection to true' do
+            subject.borrow_book('Pippi Långstrump går ombord', library)
+            subject.return_book('Pippi Långstrump går ombord', library)
+            expect(library.book_collection[4][:available]).to eq true
+        end
+   
+        it 'rejects if the person does not have the book in his/her book list' do
+            expected_output = {status: false, message: 'You do not have this book in your possession!', date: Date.today}
+            expect(subject.return_book('Harry Potter', library)).to eq expected_output
         end
 
-        it 'return borrowed book to library' do
-        
-        end
     end
 end

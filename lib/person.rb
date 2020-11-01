@@ -44,14 +44,14 @@ class Person
     def return_book(title, library)
         book_collection = library.book_collection
         case
-        when book_list.detect { |obj| obj[:item][:title] == title } == nil
+        when @book_list.detect { |obj| obj[:item][:title] == title } == nil
             {status: false, message: 'You do not have this book in your possession!', date: Date.today}
-        else 
-            book = book_list.detect { |obj| obj[:item][:title] == title }
+        else
+            book = @book_list.detect { |obj| obj[:item][:title] == title }
             index = book_collection.index {|h| h[:item][:title] == book[:item][:title]}
             book_collection[index][:available] = true
             book_collection[index][:return_date] = nil
-            book_list.reject! { |h| h[:item][title] == title }
+            @book_list.delete_if { |obj| obj[:item][title] == title }
             File.open('./lib/data.yml', 'w') { |f| f.write book_collection.to_yaml }
             {status: true, message: "You have returned #{title}.", date: Date.today}
         end
