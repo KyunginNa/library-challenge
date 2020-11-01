@@ -41,4 +41,17 @@ describe Person do
         #     expect(subject.book_list[0][:return_date]).to eq Date.today.next_month(1)
         # end
     end
+
+    describe 'person can return borrowed book' do
+        before {subject.borrow_book('Alfons och soldatpappan', library)}
+
+        it 'can check if the person has the book in his/her book list' do
+        expected_output = {status: false, message: 'You do not have this book in your possession!', date: Date.today}
+        expect(subject.return_book('Harry Potter', library)).to eq expected_output
+        end
+
+        it 'return borrowed book to library' do
+        
+        end
+    end
 end
