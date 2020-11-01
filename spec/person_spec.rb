@@ -43,11 +43,17 @@ describe Person do
     end
 
     describe 'person can return borrowed book' do
+        before {
+        subject.borrow_book('Pippi Långstrump går ombord', library)
+        subject.return_book('Pippi Långstrump går ombord', library)
+        }
 
         it 'change book availability in the library book collection to true' do
-            subject.borrow_book('Pippi Långstrump går ombord', library)
-            subject.return_book('Pippi Långstrump går ombord', library)
             expect(library.book_collection[4][:available]).to eq true
+        end
+    
+        it 'change return date in the library book collection to nil' do
+            expect(library.book_collection[4][:return_date]).to be nil
         end
    
         it 'rejects if the person does not have the book in his/her book list' do

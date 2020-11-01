@@ -1,26 +1,26 @@
 ---
 - :item:
-   :title: Alfons och soldatpappan
-   :author: Gunilla Bergström
-  :available: true
-  :return_date:
+    :title: Alfons och soldatpappan
+    :author: Gunilla Bergström
+  :available: false
+  :return_date: 2020-12-01
 - :item:
-   :title: Skartta lagon! Sa pappa Åberg
-   :author: Gunilla Bergström
+    :title: Skartta lagon! Sa pappa Åberg
+    :author: Gunilla Bergström
   :available: false
   :return_date: '2020-11-07'
 - :item:
-   :title: Osynligt med Alfons
-   :author: Gunilla Bergström
+    :title: Osynligt med Alfons
+    :author: Gunilla Bergström
   :available: true
   :return_date:
 - :item:
-   :title: Pippi Långstrump
-   :author: Astrid Lindgren
+    :title: Pippi Långstrump
+    :author: Astrid Lindgren
   :available: true
   :return_date:
 - :item:
-   :title: Pippi Långstrump går ombord
-   :author: Astrid Lindgren
+    :title: Pippi Långstrump går ombord
+    :author: Astrid Lindgren
   :available: true
   :return_date:
