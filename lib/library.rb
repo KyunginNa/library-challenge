@@ -9,21 +9,20 @@ class Library
         @book_collection = YAML.load_file('./lib/data.yml')
     end
 
-    def check_out_book(title)
+    def check_availability(title)
         case
         when book_not_exist?(title)
             {status: false, message: 'The book does not exist', date: Date.today}
         when book_not_available?(title)
             {status: false, message: 'The book is not available now', date: Date.today}
         else
-            return true
+            return true 
         end
-        end
-
-    private
+    end
+    
     def book_not_exist?(title)
         books = @book_collection.select { |obj| obj[:item][:title].include? title }
-        books == nil
+        books == []
     end
 
     def book_not_available?(title)

@@ -13,16 +13,17 @@ describe Library do
     end
 
     it 'check if the book passed in is available' do
-        expect(subject.check_out_book('Osynligt')).to eq true
+        expect(subject.check_availability('Osynligt')).to be true
     end
 
     it 'check if the library has the book that is passed in' do
-        expect(subject.check_out_book('Osynligt')).to eq true
+        expected_output = {status: true, message: 'The book is available!', date: Date.today}
+        expect(subject.check_availability('Osynligt')).to be true
     end
 
-    # it 'rejects if the book does not exist' do
-    #     expected_output = {status: false, message: 'The book does not exist', date: Date.today}
-    #     expect(subject.check_out_book('Harry Potter')).to eq expected_output
-    # end
+    it 'rejects if the book does not exist' do
+        expected_output = {status: false, message: 'The book does not exist', date: Date.today}
+        expect(subject.check_availability('Harry Potter')).to eq expected_output
+    end
 
 end

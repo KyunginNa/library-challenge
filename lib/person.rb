@@ -1,36 +1,43 @@
 require 'yaml'
 require 'date'
+require './lib/library.rb'
 
 class Person
-    attr_accessor :book_list
+    attr_accessor :book_list, :name
 
-    def initialize
+    def initialize(name)
+        @name = name
         @book_list = []
     end
 
-    def search(title)
-        book_collection = YAML.load_file('./lib/data.yml')
+    def search(title, library)
+        book_collection = library.book_collection
         if  book_collection.select { |obj| obj[:item][:title].include? title } != [] then
             books = book_collection.select { |obj| obj[:item][:title].include? title }
             return books
-        else 
+        else
             {status: false, message: 'The book does not exist', date: Date.today}
         end
     end
 
-
-    def borrow_book(title)
-        book_collection = YAML.load_file('./lib/data.yml')
-        books=search(title)
+    def borrow_book(title, library)
+        case
+        when library.check_availability(title) == true
+        book_collection = library.book_collection
+        books=search(title, library)
         books.each do |book|
             index = book_collection.index {|h| h[:item][:title] == book[:item][:title]}
             book_collection[index][:available] = false
-            
             book_collection[index][:return_date] = Date.today.next_month(1)
-            
             book = book_collection[index]
             @book_list << book
         end
         File.open('./lib/data.yml', 'w') { |f| f.write book_collection.to_yaml }
+        {status: true, message: "You borrowed #{title}.", date: Date.today}
+        when library.book_not_exist?(title) == true
+            {status: false, message: 'The book does not exist', date: Date.today}
+        when library.book_not_available?(title) == true
+            {status: false, message: 'The book is not available now', date: Date.today}
+        end
     end
 end
