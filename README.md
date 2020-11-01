@@ -2,16 +2,16 @@
 ​
 ## User Stories
 
->As a library operater
->In order to keep track of the books we have
+>As a library operater  
+>In order to keep track of the books we have  
 >I want to have a list of the books with their title, author and availability
 
->As a library operator
->In order to make visitors to return a book on time
+>As a library operator  
+>In order to make visitors to return a book on time  
 >I want to inform them due date when they check out books
 
->As a visitor
->In order to borrow books
+>As a visitor  
+>In order to borrow books  
 >I want to search books by title and check their availability​
 
 
@@ -22,17 +22,17 @@ The application allows users to create a person and a library. A person can sear
 
 ## Dependencies
 ​
-RSpec 3.10.0 (https://rubygems.org/gems/rspec)
-YAML (https://yaml.org/)
-Pry 0.13.1 (https://rubygems.org/gems/pry)
-Pry-byebug 3.9.0 (https://rubygems.org/gems/pry-byebug)
+RSpec 3.10.0 (https://rubygems.org/gems/rspec)  
+YAML (https://yaml.org/)  
+Pry 0.13.1 (https://rubygems.org/gems/pry)  
+Pry-byebug 3.9.0 (https://rubygems.org/gems/pry-byebug)  
 ​Coveralls 0.8.23(https://rubygems.org/gems/coveralls)
 ​
 
 ## Setup
 ​
 1. Clone the repo below to your local folder.
-Repo: (https://github.com/KyunginNa/library-challenge.git)
+Repo: (https://github.com/Ehugo2000/library-challenge.git) or (https://github.com/KyunginNa/library-challenge.git)
 ​
 2. Open the terminal and cd to the library-challenge folder.
 ​
