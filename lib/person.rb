@@ -28,13 +28,13 @@ class Person
             {status: false, message: 'The book is not available now', date: Date.today}
         else 
             book_collection = library.book_collection
-            books=search(title, library)
+            books = search(title, library)
             books.each do |book|
                 index = book_collection.index {|h| h[:item][:title] == book[:item][:title]}
                 book_collection[index][:available] = false
                 book_collection[index][:return_date] = Date.today.next_month(1)
                 book = book_collection[index]
-                @book_list << book
+                @book_list.push(book)
             end
             File.open('./lib/data.yml', 'w') { |f| f.write book_collection.to_yaml }
             {status: true, message: "You borrowed #{title}.", date: Date.today}
@@ -51,7 +51,7 @@ class Person
             index = book_collection.index {|h| h[:item][:title] == book[:item][:title]}
             book_collection[index][:available] = true
             book_collection[index][:return_date] = nil
-            @book_list.delete_if { |obj| obj[:item][title] == title }
+            @book_list.delete_if { |h| h[:item][:title] == book[:item][:title] }
             File.open('./lib/data.yml', 'w') { |f| f.write book_collection.to_yaml }
             {status: true, message: "You have returned #{title}.", date: Date.today}
         end

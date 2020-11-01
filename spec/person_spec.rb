@@ -31,22 +31,24 @@ describe Person do
     end
 
     describe 'person can borrow book if it is available' do
-        before {subject.borrow_book('Alfons och soldatpappan', library)}
+        before do
+            subject.borrow_book('Alfons och soldatpappan', library)
+        end
    
-        it 'change book availability in the book list to false' do
-            expect(subject.book_list[0][:available]).to be false
+        it 'change book availability in the library book collection to false' do
+            expect(library.book_collection[0][:available]).to be false
         end
         
-        # it 'set return date in the book list' do
-        #     expect(subject.book_list[0][:return_date]).to eq Date.today.next_month(1)
-        # end
+        it 'set return date in the library book collection' do
+            expect(library.book_collection[0][:return_date]).to eq Date.today.next_month(1)
+        end
     end
 
     describe 'person can return borrowed book' do
-        before {
-        subject.borrow_book('Pippi Långstrump går ombord', library)
-        subject.return_book('Pippi Långstrump går ombord', library)
-        }
+        before do
+            subject.borrow_book('Pippi Långstrump går ombord', library)
+            subject.return_book('Pippi Långstrump går ombord', library)
+        end
 
         it 'change book availability in the library book collection to true' do
             expect(library.book_collection[4][:available]).to eq true
@@ -55,11 +57,14 @@ describe Person do
         it 'change return date in the library book collection to nil' do
             expect(library.book_collection[4][:return_date]).to be nil
         end
+
+        it 'deletes the returned book from the book list a person has' do
+            expect(subject.book_list).not_to include 'Pippi Långstrump går ombord'
+        end
    
         it 'rejects if the person does not have the book in his/her book list' do
             expected_output = {status: false, message: 'You do not have this book in your possession!', date: Date.today}
             expect(subject.return_book('Harry Potter', library)).to eq expected_output
         end
-
     end
 end
