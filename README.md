@@ -1,52 +1,96 @@
-## Library Challenge
-### Week 1 Ruby challenge
+# Library Challenge
+​
+## User Stories
 
-Instructions
--------
-Read this entire README carefully and follow all instructions.
+>As a library operater
+>In order to keep track of the books we have
+>I want to have a list of the books with their title, author and availability
 
-* Challenge time: this weekend, until Monday 9am
-* Feel free to use Google, Stack Overflow, your notes, previously written code, books, etc. but work on your own
-* If you refer to or have in whole or partially used the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution to GitHub and create a Pull Request**
-* You must submit a Pull Request to this repository with your code by 9.30am Monday morning - before the stand-up
+>As a library operator
+>In order to make visitors to return a book on time
+>I want to inform them due date when they check out books
 
-
-### Tasks
-----
-
-* Fork the challenge repo: https://github.com/CraftAcademy/library-challenge
-* Run the command `bundle install` in the project directory to ensure you have all the gems
-* Write your specs and implementation
-* Be smart about using Git: commit and push often. Use feature branches.
-* Create a Pull Request as soon as possible
-* Read the comments from Hound and fix any issues that the service points out.
-
-### Tips
-----
-
-##### Some hints:
-  * A Person needs to have a list of books that he currently has in his possession. That list needs to include the return date.
-  * The return date can be calculated using the `Date` object. Out of the box, there are methods you can use to add days to the current date.
-  * Make use of `doubles` when writing your specs
-  * Follow the [naming conventions/standards](https://craftacademy.gitbooks.io/coding-as-a-craft/content/extras/naming_standards.html) for methods and variables
-
-### What we are looking for
-----
-##### I'm hoping to see that:
-* You can take a problem set and write a well tested implementation on your own.
-* You understand how to define Ruby Classes and work with objects.
-* You understand how classes can interact with each other.
-* You know how to make use of arrays, hashes, and associated methods to create dynamic lists.
-* You know how to write specs and use them as a blueprint in your development.
-* I can track your work by following you commit history - so please commit as soon you are done with a feature or when you have made a test pass.
-
-##### In your Pull Request, I'm hoping to see:
-* That you are testing the right thing in the right spec file.
-* That all tests passing - green is good!
-* High test coverage (above 95% is accepted)
-* The code is easy to follow: every class has a clear responsibility, methods are short, code is nicely formatted, etc.
-* The `README.md` includes information on how to use your solution with command examples in `irb`. (Feel free to remove this text)
+>As a visitor
+>In order to borrow books
+>I want to search books by title and check their availability​
 
 
-**Happy coding!**
+## The code
+​
+The application allows users to create a person and a library. A person can search a book by title to check if it is available, borrow a book and return it. As the person borrows/returns the book, its availability and return date in the yaml-file are updated. This is a back-end application running in IRB.
+​
+
+## Dependencies
+​
+RSpec 3.10.0 (https://rubygems.org/gems/rspec)
+YAML (https://yaml.org/)
+Pry 0.13.1 (https://rubygems.org/gems/pry)
+Pry-byebug 3.9.0 (https://rubygems.org/gems/pry-byebug)
+​Coveralls 0.8.23(https://rubygems.org/gems/coveralls)
+​
+
+## Setup
+​
+1. Clone the repo below to your local folder.
+Repo: (https://github.com/KyunginNa/library-challenge.git)
+​
+2. Open the terminal and cd to the library-challenge folder.
+​
+3. Start IRB in your terminal and load Date class and the ruby files.
+```ruby
+require 'yaml'
+require 'date'
+load './lib/library.rb'
+load './lib/person.rb'
+```
+
+
+## Instructions
+​
+1. Create a person and a library and make your first search for a book.
+ ```ruby
+person = Person.new(name: 'Tom')
+library = Library.new
+person.search('title', library)
+# person.search('Pippi', library)
+#  => [{:item=>{:title=>"Pippi Långstrump", :author=>"Astrid Lindgren"}, :available=>true, :return_date=>nil}, {:item=>{:title=>"Pippi Långstrump går ombord", :author=>"Astrid Lindgren"}, :available=>true, :return_date=>nil}]
+```
+​
+2. Borrow a book.
+```ruby
+person.borrow_book('title', library)
+# person.borrow_book('Alfons och soldatpappan' , library)
+#  => {:status=>true, :message=>"You borrowed Alfons och soldatpappan.", :date=>#<Date: 2020-11-01 ((2459155j,0s,0n),+0s,2299161j)>} 
+# => #<Library:0x00007fc9baabf438 @book_collection=[{:item=>{:title=>"Alfons och soldatpappan", :author=>"Gunilla Bergström"}, :available=>false, :return_date=>#<Date: 2020-12-01 ((2459185j,0s,0n),+0s,2299161j)>}, [...]> 
+#  => #<Person:0x00007fc9bab2f440 @name={:name=>"Tom"}, @book_list=[{:item=>{:title=>"Alfons och soldatpappan", :author=>"Gunilla Bergström"}, :available=>false, :return_date=>#<Date: 2020-12-01 ((2459185j,0s,0n),+0s,2299161j)>}]>
+```
+​
+3. Return a borrowed book to library.
+```ruby
+person.return_book('title', library)
+person.return_book('Alfons och soldatpappan' , library)
+# => {:status=>true, :message=>"You have returned Alfons och soldatpappan.", :date=>#<Date: 2020-11-01 ((2459155j,0s,0n),+0s,2299161j)>} 
+# => #<Library:0x00007fc9baabf438 @book_collection=[{:item=>{:title=>"Alfons och soldatpappan", :author=>"Gunilla Bergström"}, :available=>true, :return_date=>nil}, [...]> 
+# => #<Person:0x00007fc9bab2f440 @name={:name=>"Tom"}, @book_list=[]> 
+```
+
+​
+## Acknowledgements
+​
+Project instructions from Craft Academy: (https://learn.craftacademy.co/courses/645199/lectures/11549663)  
+Editor: VSC (https://code.visualstudio.com/)  
+Programming language: (https://www.ruby-lang.org/en/documentation/installation/)  
+Testing framework: Rspec and Pry (https://rspec.info/)
+Gems: (https://rubygems.org)  
+​
+
+## Update and Improvements plans
+​
+- Add more books to library list.
+- Add a method to send out reminders to borrowers that hold overdue books.
+- Modify search method to conclude a wider search for literature.
+- Create a copy of data.yml and set it as a data source(instead of setting data.yml) when a library instance is created.
+​
+## License
+​
+The MIT License (MIT).
